@@ -43,6 +43,7 @@ public class JdbcSchemaCsvParser extends CsvParserPlugin
 				Column column = schemaFromJdbc.getColumn(i);
 				logger.info(String.format("column %d : name = %s, type = %s", i + 1, column.getName(), column.getType()));
 			}
+			config.set("columns", schemaFromJdbc.getColumns());
 
 			super.transaction(config, new Control() {
 				@Override
