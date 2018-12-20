@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.embulk.config.ConfigSource;
 import org.embulk.config.TaskSource;
+import org.embulk.plugin.DefaultPluginType;
 import org.embulk.plugin.PluginType;
 import org.embulk.spi.Column;
 import org.embulk.spi.Exec;
@@ -34,7 +35,7 @@ public class JdbcSchemaCsvParser extends CsvParserPlugin
 		ExecSession session = Exec.session();
 		ConfigSource child = config.getNested("schema");
 		String type = child.get(String.class, "type");
-		InputPlugin input = session.newPlugin(InputPlugin.class, new PluginType(type));
+		InputPlugin input = session.newPlugin(InputPlugin.class, DefaultPluginType.create(type));
 
 		try {
 			JdbcInputPluginHelper helper = new JdbcInputPluginHelper(input);
